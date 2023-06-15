@@ -12,3 +12,7 @@
   - 230613_remocon/png1のデータを使用   
 - 230613_remocon/xarm_position_xyz.txt
   -  https://github.com/h-cha/unity_to_instant-ngp/issues/1#issuecomment-1591113184
+  -  ロボットアームの先端の座標を取得
+  -  `1.00000  0.00031  -0.00050  0.00031　←xarm.transform.rotation　Quaternion(x, y, z, w)`
+  -  `-0.28  0.35  0.28　←xarm.transform.position　(x, y, z)`
+
