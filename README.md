@@ -19,5 +19,5 @@
 
 ### 230615
 - 230615_unity/xarm_position_xyz.txt
-  -  
+  -  https://github.com/h-cha/unity_to_instant-ngp/issues/2#issue-1758620074
   -  仮のカメラを４つ配置して、それぞれの座標を取得
