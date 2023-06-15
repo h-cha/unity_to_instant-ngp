@@ -11,4 +11,4 @@
   - charucoボードを使用してカメラ姿勢を推定   
   - 230613_remocon/png1のデータを使用   
 - 230613_remocon/xarm_position_xyz.txt
-  -  
+  -  https://github.com/h-cha/unity_to_instant-ngp/issues/1#issuecomment-1591113184
