@@ -1,5 +1,6 @@
 # unity_to_instant-ngp
 ## data
+### 230613
 - 230613_remocon/png   
   - スマホで撮影した元画像（画像サイズ　3024 × 4032）   
 - 230613_remocon/png1   
@@ -16,3 +17,7 @@
   -  `1.00000  0.00031  -0.00050  0.00031　←xarm.transform.rotation　Quaternion(x, y, z, w)`
   -  `-0.28  0.35  0.28　←xarm.transform.position　(x, y, z)`
 
+### 230615
+- 230615_unity/xarm_position_xyz.txt
+  -  
+  -  仮のカメラを４つ配置して、それぞれの座標を取得
