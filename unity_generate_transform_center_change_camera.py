@@ -185,10 +185,10 @@ def generate_transform_matrix(mat):
 
 
 def main():
-    data_dir = "./data/230613_remocon"
+    data_dir = "./data/230627_unity"
     # data_dir = "./data/220909_muscat"
     # data_dir = "./data/220910_pearl"
-    png_dir = os.path.join(data_dir, "png1/")
+    png_dir = os.path.join(data_dir, "png/")
     json_path = os.path.join(data_dir, "calib_result.json")
     res_path = os.path.join(data_dir, "transforms.json")
 
@@ -299,61 +299,61 @@ def main():
 
         transform_dict["frames"].append(frame_dict)
 
-        # cv2.imshow("test", imaxis)
-        # cv2.waitKey(10)
+    #     # cv2.imshow("test", imaxis)
+    #     # cv2.waitKey(10)
 
-    print("flip coordinates ...")
-    for f in transform_dict["frames"]:
-        c2w = f["transform_matrix"]
-        c2w[0:3, 2] *= -1   # flip the y and z axis
-        c2w[0:3, 1] *= -1
-        c2w = c2w[[1, 0, 2, 3], :]  # swap y and z
-        c2w[2, :] *= -1  # flip whole world upside down
-    print(c2w)
+    # print("flip coordinates ...")
+    # for f in transform_dict["frames"]:
+    #     c2w = f["transform_matrix"]
+    #     c2w[0:3, 2] *= -1   # flip the y and z axis
+    #     c2w[0:3, 1] *= -1
+    #     c2w = c2w[[1, 0, 2, 3], :]  # swap y and z
+    #     c2w[2, :] *= -1  # flip whole world upside down
+    # print(c2w)
 
 
-    print("computing center of attention...")
-    totw = 0.0
-    totp = np.array([0.0, 0.0, 0.0])
+    # print("computing center of attention...")
+    # totw = 0.0
+    # totp = np.array([0.0, 0.0, 0.0])
 
-    count = 0
-    for f in transform_dict["frames"]:
-        mf = f["transform_matrix"][0:3, :]
-        print(mf)
-        for g in transform_dict["frames"]:
-            mg = g["transform_matrix"][0:3, :]
-            p, w = closest_point_2_lines(
-                mf[:, 3], mf[:, 2], mg[:, 3], mg[:, 2])
-            if w > 0.01:
-                totp += p*w
-                totw += w
-            count += 1
-    print("totw:", totw, ", cnt:", count, ", avgw:", totw/count)
+    # count = 0
+    # for f in transform_dict["frames"]:
+    #     mf = f["transform_matrix"][0:3, :]
+    #     print(mf)
+    #     for g in transform_dict["frames"]:
+    #         mg = g["transform_matrix"][0:3, :]
+    #         p, w = closest_point_2_lines(
+    #             mf[:, 3], mf[:, 2], mg[:, 3], mg[:, 2])
+    #         if w > 0.01:
+    #             totp += p*w
+    #             totw += w
+    #         count += 1
+    # print("totw:", totw, ", cnt:", count, ", avgw:", totw/count)
 
-    totp /= totw
-    transform_dict["totp"] = totp.tolist()
-    print(totp)  # the cameras are looking at totp
+    # totp /= totw
+    # transform_dict["totp"] = totp.tolist()
+    # print(totp)  # the cameras are looking at totp
 
-    for f in transform_dict["frames"]:
-        f["transform_matrix"][0:3, 3] -= totp
+    # for f in transform_dict["frames"]:
+    #     f["transform_matrix"][0:3, 3] -= totp
 
-    avglen = 0.
-    for f in transform_dict["frames"]:
-        avglen += np.linalg.norm(f["transform_matrix"][0:3, 3])
-    avglen /= len(transform_dict["frames"])
+    # avglen = 0.
+    # for f in transform_dict["frames"]:
+    #     avglen += np.linalg.norm(f["transform_matrix"][0:3, 3])
+    # avglen /= len(transform_dict["frames"])
 
-    print("avg camera distance from origin", avglen)
-    print("scale: ", 4.0 / avglen)
-    transform_dict["totw"] = 4.0 / avglen
+    # print("avg camera distance from origin", avglen)
+    # print("scale: ", 4.0 / avglen)
+    # transform_dict["totw"] = 4.0 / avglen
 
-    for f in transform_dict["frames"]:
-        f["transform_matrix"][0:3, 3] *= 4.0 / avglen
+    # for f in transform_dict["frames"]:
+    #     f["transform_matrix"][0:3, 3] *= 4.0 / avglen
 
-    for f in transform_dict["frames"]:
-        f["transform_matrix"] = f["transform_matrix"].tolist()
+    # for f in transform_dict["frames"]:
+    #     f["transform_matrix"] = f["transform_matrix"].tolist()
 
-    with open(res_path, "w") as fp:
-        json.dump(transform_dict, fp, indent=2)
+    # with open(res_path, "w") as fp:
+    #     json.dump(transform_dict, fp, indent=2)
 
 
 if __name__ == "__main__":
@@ -364,7 +364,7 @@ if __name__ == "__main__":
     # board = aruco.CharucoBoard_create(10, 7, 0.0285, 0.0171, aruco_dict)
     # imboard = board.draw((1200, 1000), 10, 1)
     # cv2.imwrite(workdir + "chessboard.tiff", imboard)
-    path = "./data/230613_remocon/xarm_position_xyz.txt"
+    path = "./data/230627_unity/xarm_position_xyz.txt"
     with open(path, "r", encoding='utf-8') as f:
         datalist  = f.readlines()
 

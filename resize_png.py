@@ -1,6 +1,6 @@
 import os
 from PIL import Image
-data_dir = "./data/230613_remocon"
+data_dir = "./data/230629_remocon1"
 png_dir = os.path.join(data_dir, "png/")
 save_dir = os.path.join(data_dir, "png1/")
 
@@ -12,7 +12,7 @@ def crop_center(pil_img, crop_width, crop_height):
                          (img_height + crop_height) // 2))
 
 for f in os.listdir(png_dir):
-    if f.endswith(".JPG"):
+    if f.endswith(".jpg"):
         
         photo = Image.open(os.path.join(png_dir, f))
         print(photo)
